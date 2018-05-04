@@ -5,6 +5,9 @@ const port = 8000;
 const app = express();
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const cors = require('cors')
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 
 passport.use(new GoogleStrategy({
@@ -17,15 +20,64 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+app.use(cors())
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.set('json spaces', 2);
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => { // url: http://localhost:8000
   res.json(
     {
       data: 'Here is JSON reply',
+    }
+  )
+})
+
+app.get('/siteAnalyses', (req, res) => { // url: http://localhost:8000/siteAnalyses
+  res.json(
+    {
+      data: [
+        {
+          type: "siteAnalysis",
+          id: 1,
+          attributes: {
+            updatedAt: "2018-05-04T10:46:25.062Z",
+            title: "Our main page",
+            url: "http://dupa.com",
+            status: "pending"
+          }
+        }, {
+          type: "siteAnalysis",
+          id: 2,
+          attributes: {
+            updatedAt: "2018-05-04T10:46:25.062Z",
+            title: "Our second page",
+            url: "http://dupa.com/second",
+            status: "pending"
+          }
+        }
+      ]
+    }
+  )
+})
+
+app.post('/siteAnalyses', (req, res) => { // url: http://localhost:8000/siteAnalyses
+  console.log(req.body)
+  res.json(
+    {
+      data: [
+        {
+          type: 'siteAnalysis',
+          id: 123,
+          attributes: {
+            updatedAt: + new Date(),
+            title: req.body.title,
+            url: req.body.url,
+            status: 'pending'
+          }
+        }
+      ]
     }
   )
 })

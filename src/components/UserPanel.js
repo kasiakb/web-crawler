@@ -8,7 +8,6 @@ class UserPanel extends Component {
     this.state = {
       titleInput: '',
       urlInput: '',
-      webs: []
     }
   }
 
@@ -54,21 +53,20 @@ class UserPanel extends Component {
   }
 
   renderWebs() {
-    if(typeof this.state.siteAnalysis === 'undefined' || this.state.siteAnalysis === null) {
-      return null
-    }else{
-      
+    if(this.state.siteAnalysis) {
       return this.state.siteAnalysis.map((web) => {
         return (
-            <tr key={web.id}>
-              <td>{moment(web.attributes.updatedAt).format('lll')}</td>
-              <td>{web.attributes.title}</td>
-              <td>{web.attributes.url}</td>
-              <td>{web.attributes.status}</td>
-              <td><button>Delate</button></td>
-            </tr>
+          <tr key={web.id}>
+            <td>{moment(web.attributes.updatedAt).format('lll')}</td>
+            <td>{web.attributes.title}</td>
+            <td>{web.attributes.url}</td>
+            <td>{web.attributes.status}</td>
+            <td><button>Delate</button></td>
+          </tr>
         );
       })
+    }else{
+      return null
     }
   }
 
@@ -77,8 +75,20 @@ class UserPanel extends Component {
       <div>
         <form>
           <h1>Choose web page to crawl</h1>
-          <input type = "text" id="title" placeholder="web page title" value={this.state.titleInput} onChange={(e) => this.titleChange(e)}/>
-          <input type = "text" id="url" placeholder="web page url" value={this.state.urlInput} onChange={(e) => this.urlChange(e)}/>
+          <input
+            type = "text"
+            id="title"
+            placeholder="web page title"
+            value={this.state.titleInput}
+            onChange={(e) => this.titleChange(e)}
+          />
+          <input
+            type = "text"
+            id="url"
+            placeholder="web page url"
+            value={this.state.urlInput}
+            onChange={(e) => this.urlChange(e)}
+          />
           <button onClick={(e)=>this.addWebPage(e)}>Analyse</button>
           <table>
             <tbody> 

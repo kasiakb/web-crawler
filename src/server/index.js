@@ -82,6 +82,16 @@ app.post('/siteAnalyses', (req, res) => { // url: http://localhost:8000/siteAnal
   )
 })
 
+app.delete('/siteAnalyses/:id' , (req, res) => { // url: http://localhost:8000/siteAnalyses
+  if(req.params.id > 100) {
+    console.log('returning 404')
+    res.status(404).send('Record not found')
+  } else {
+    console.log('returning 204')
+    res.status(204).send('Done')
+  }
+})
+
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 

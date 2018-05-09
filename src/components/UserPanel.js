@@ -52,6 +52,28 @@ class UserPanel extends Component {
     });
   }
 
+  deleteWebPage(e) {
+    e.preventDefault();
+    const id = +e.target.name
+    if (window.confirm("Are you sure you want to delete this page?")) {
+      fetch(`http://localhost:8000/siteAnalyses/${id}`, {
+        method: 'DELETE',
+        mode: 'cors',
+      })
+      .then(response => {
+        if(response.status === 204) {
+          this.setState({
+            siteAnalysis: this.state.siteAnalysis.filter((web) => web.id !== id)
+          });
+        }
+        else{
+          window.alert("You can't delete this page.")
+        }
+      })
+      .catch(error => console.error(error))
+    }
+  }
+
   renderWebs() {
     if(this.state.siteAnalysis) {
       return this.state.siteAnalysis.map((web) => {
@@ -61,7 +83,7 @@ class UserPanel extends Component {
             <td>{web.attributes.title}</td>
             <td>{web.attributes.url}</td>
             <td>{web.attributes.status}</td>
-            <td><button>Delate</button></td>
+            <td><button name={web.id} onClick={(e)=>this.deleteWebPage(e)}>Delete</button></td>
           </tr>
         );
       })

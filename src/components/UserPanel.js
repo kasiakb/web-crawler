@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom'
 import moment from 'moment'
 import '../css/UserPanel.css'
+import { Form, Field } from 'react-final-form'
 
 class UserPanel extends Component {
   constructor(props) {
@@ -94,9 +96,7 @@ class UserPanel extends Component {
 
   render() {
     return (
-      <div>
-        <form>
-          <h1>Choose web page to crawl</h1>
+        <div>
           <input
             type = "text"
             id="title"
@@ -111,7 +111,7 @@ class UserPanel extends Component {
             value={this.state.urlInput}
             onChange={(e) => this.urlChange(e)}
           />
-          <button onClick={(e)=>this.addWebPage(e)}>Analyse</button>
+          <button onClick={(e)=>this.addWebPage(e)}>Analyse</button> 
           <table>
             <tbody> 
               <tr>
@@ -124,8 +124,7 @@ class UserPanel extends Component {
               {this.renderWebs()}
             </tbody>
           </table>
-        </form>
-      </div>
+        </div>
     );
   }
 }

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom'
-import moment from 'moment'
-import '../css/UserPanel.css'
-import { Form, Field } from 'react-final-form'
+import Inputs from './Inputs';
+import Table from './Table';
+
 
 class UserPanel extends Component {
   constructor(props) {
     super(props);
+
+    this.addWebPage = this.addWebPage.bind(this)
+    this.deleteWebPage = this.deleteWebPage.bind(this)
     this.state = {
-      titleInput: '',
-      urlInput: '',
+      
     }
   }
 
@@ -23,21 +24,9 @@ class UserPanel extends Component {
     .catch(error => console.error('Error:', error))
   }
 
-  titleChange(e) {
-    this.setState({ titleInput: e.target.value });
-  }
-  urlChange(e) {
-    this.setState({ urlInput: e.target.value });
-  }
-
-  addWebPage(e) {
-    e.preventDefault();
-    const newWeb = {
-      title: this.state.titleInput,
-      url: this.state.urlInput,
-    };
+  addWebPage(newWeb) {
     fetch('http://localhost:8000/siteAnalyses', {
-      body: JSON.stringify(newWeb),
+      body: newWeb,
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -48,10 +37,6 @@ class UserPanel extends Component {
     .then(response => response.json())
     .then(response => this.setState({siteAnalysis: this.state.siteAnalysis.concat(response.data)}))
     .catch(error => console.error('Error:', error))
-    this.setState({
-      titleInput: '',
-      urlInput: ''
-    });
   }
 
   deleteWebPage(e) {
@@ -61,7 +46,7 @@ class UserPanel extends Component {
       fetch(`http://localhost:8000/siteAnalyses/${id}`, {
         method: 'DELETE',
         mode: 'cors',
-      })
+      })      
       .then(response => {
         if(response.status === 204) {
           this.setState({
@@ -76,55 +61,15 @@ class UserPanel extends Component {
     }
   }
 
-  renderWebs() {
-    if(this.state.siteAnalysis) {
-      return this.state.siteAnalysis.map((web) => {
-        return (
-          <tr key={web.id}>
-            <td>{moment(web.attributes.updatedAt).format('lll')}</td>
-            <td>{web.attributes.title}</td>
-            <td>{web.attributes.url}</td>
-            <td>{web.attributes.status}</td>
-            <td><button name={web.id} onClick={(e)=>this.deleteWebPage(e)}>Delete</button></td>
-          </tr>
-        );
-      })
-    }else{
-      return null
-    }
-  }
-
   render() {
     return (
-        <div>
-          <input
-            type = "text"
-            id="title"
-            placeholder="web page title"
-            value={this.state.titleInput}
-            onChange={(e) => this.titleChange(e)}
-          />
-          <input
-            type = "text"
-            id="url"
-            placeholder="web page url"
-            value={this.state.urlInput}
-            onChange={(e) => this.urlChange(e)}
-          />
-          <button onClick={(e)=>this.addWebPage(e)}>Analyse</button> 
-          <table>
-            <tbody> 
-              <tr>
-                <th>Data</th>
-                <th>Web Title</th>
-                <th>Web URL</th>
-                <th>Analysis Status</th>
-                <th>Delate</th>
-              </tr>
-              {this.renderWebs()}
-            </tbody>
-          </table>
-        </div>
+      <div>
+        <Inputs add={this.addWebPage}/>
+        <Table 
+          data={this.state.siteAnalysis}
+          delete={this.deleteWebPage}
+        />
+      </div>
     );
   }
 }

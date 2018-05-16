@@ -6,7 +6,7 @@ const required = value => (value ? undefined : "Required");
 const notTooLong = value => (value.length <= 30 ? undefined : "Too long title");
 
 const properUrl = value =>
-(value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) == null ? "Wrong url format" : undefined )
+(value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) == null ? "Wrong url format" : undefined)
 
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
@@ -27,11 +27,9 @@ class Inputs extends Component {
       <Form
         onSubmit={this.onSubmit}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
-          <form 
+          <form
             onSubmit={event =>{
               let promise = handleSubmit(event);
-              console.log('heyyy :-D', promise);
-              console.log('data',JSON.stringify(values, 0, 2))
               if(promise){
                 promise.then(() => {
                   this.props.add(JSON.stringify(values, 0, 2))
@@ -42,8 +40,7 @@ class Inputs extends Component {
                 return promise;
               }}
               }
-            >
-           
+            >           
             <Field name="title" validate={composeValidators(required, notTooLong)}>
               {({ input, meta }) => (
                 <div>
@@ -61,7 +58,7 @@ class Inputs extends Component {
               )}
             </Field>
             <div className="buttons">
-              <button 
+              <button
               type="submit"
               disabled={submitting}
               >
@@ -78,7 +75,7 @@ class Inputs extends Component {
           </form>
         )
       }
-      /> 
+      />
     </div>
   )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Inputs from './Inputs';
-import Table from './Table';
+import AnalysisTable from './AnalysisTable';
+import AnalaysisTableItem from './AnalaysisTableItem';
 
 
 class UserPanel extends Component {
@@ -46,7 +47,7 @@ class UserPanel extends Component {
       fetch(`http://localhost:8000/siteAnalyses/${id}`, {
         method: 'DELETE',
         mode: 'cors',
-      })      
+      })
       .then(response => {
         if(response.status === 204) {
           this.setState({
@@ -65,9 +66,9 @@ class UserPanel extends Component {
     return (
       <div>
         <Inputs add={this.addWebPage}/>
-        <Table 
-          data={this.state.siteAnalysis}
-          delete={this.deleteWebPage}
+        <AnalysisTable
+          deleteWebPage={this.deleteWebPage}
+          webPageInfo={this.state.siteAnalysis}
         />
       </div>
     );

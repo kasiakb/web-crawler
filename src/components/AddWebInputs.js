@@ -7,7 +7,7 @@ import {
   composeValidators
 } from './InputValidationConst'
 
-class Inputs extends Component {
+class AddWebInputs extends Component {
 
   onSubmit = () => {
     return new Promise(resolve => {
@@ -84,4 +84,4 @@ class Inputs extends Component {
   }
 }
 
-export default Inputs
+export default AddWebInputs

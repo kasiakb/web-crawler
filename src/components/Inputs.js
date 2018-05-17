@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Field } from "react-final-form";
-
-const required = value => (value ? undefined : "Required");
-
-const notTooLong = value => (value.length <= 30 ? undefined : "Too long title");
-
-const properUrl = value =>
-(value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) == null ? "Wrong url format" : undefined)
-
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
-
+import { Form, Field } from 'react-final-form';
+import {
+  required,
+  notTooLong,
+  properUrl,
+  composeValidators
+} from './InputValidationConst'
 
 class Inputs extends Component {
 
@@ -83,7 +78,7 @@ class Inputs extends Component {
   render() {
     return (
       <div>
-      {this.myForm()}
+        {this.myForm()}
       </div>
     )
   }

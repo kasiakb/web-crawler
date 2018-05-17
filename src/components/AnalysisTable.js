@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import '../css/UserPanel.css'
+import AnalaysisTableItem from './AnalaysisTableItem';
 
-class Table extends Component {
+class AnalaysisTable extends Component {
 
   renderWebs(siteAnalysis) {
     if(siteAnalysis) {
       return siteAnalysis.map((web) => {
         return (
-          <tr key={web.id}>
-            <td>{moment(web.attributes.updatedAt).format('lll')}</td>
-            <td>{web.attributes.title}</td>
-            <td>{web.attributes.url}</td>
-            <td>{web.attributes.status}</td>
-            <td><button name={web.id} onClick={(e)=>this.props.delete(e)}>Delete</button></td>
-          </tr>
+          <AnalaysisTableItem
+          web={web}
+          deleteWebPage={this.props.deleteWebPage}
+           />
         );
       })
     }else{
@@ -34,7 +32,7 @@ class Table extends Component {
                 <th>Analysis Status</th>
                 <th>Delate</th>
               </tr>
-              {this.renderWebs(this.props.data)}
+              {this.renderWebs(this.props.webPageInfo)}
             </tbody>
           </table>
       </div>
@@ -42,4 +40,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default AnalaysisTable;

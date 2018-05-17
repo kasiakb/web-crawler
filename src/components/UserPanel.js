@@ -4,6 +4,7 @@ import AnalysisTable from './AnalysisTable';
 import AnalaysisTableItem from './AnalaysisTableItem';
 
 
+
 class UserPanel extends Component {
   constructor(props) {
     super(props);

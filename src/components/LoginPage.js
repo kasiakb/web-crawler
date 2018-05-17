@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import SignInInputs from './SignInInputs';
 
 
 class LoginPage extends Component {
   render() {
     return (
-      <button name = "sign">Sign in with Google</button>
+    <div>
+      <SignInInputs/>
+    </div>
     );
   }
 }

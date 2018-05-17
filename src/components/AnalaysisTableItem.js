@@ -11,7 +11,14 @@ class AnalaysisTableItem extends Component {
         <td>{this.props.web.attributes.title}</td>
         <td>{this.props.web.attributes.url}</td>
         <td>{this.props.web.attributes.status}</td>
-        <td><button name={this.props.web.id} onClick={(e)=>this.props.deleteWebPage(e)}>Delete</button></td>
+        <td>
+          <button 
+            name={this.props.web.id}
+            onClick={(e)=>this.props.deleteWebPage(e)}
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     );
   }

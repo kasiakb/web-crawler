@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Inputs from './Inputs';
+import AddWebInputs from './AddWebInputs';
 import AnalysisTable from './AnalysisTable';
 import AnalaysisTableItem from './AnalaysisTableItem';
 
@@ -65,7 +65,7 @@ class UserPanel extends Component {
   render() {
     return (
       <div>
-        <Inputs add={this.addWebPage}/>
+        <AddWebInputs add={this.addWebPage}/>
         <AnalysisTable
           deleteWebPage={this.deleteWebPage}
           webPageInfo={this.state.siteAnalysis}

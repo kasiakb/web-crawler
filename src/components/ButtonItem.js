@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
-
 
 class ButtonItem extends Component {
   render() {
@@ -9,7 +7,7 @@ class ButtonItem extends Component {
         type="submit"
         disabled={this.submitting}
       >
-        Sign in
+        {this.props.text}
       </button>
     );
   }

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import AddWebInputs from './AddWebInputs';
 import AnalysisTable from './AnalysisTable';
-import AnalaysisTableItem from './AnalaysisTableItem';
-
-
 
 class UserPanel extends Component {
   constructor(props) {

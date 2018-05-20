@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { Form, Field } from 'react-final-form';
-import {
-  required,
-  notTooLong,
-  composeValidators
-} from './InputValidationConst'
+import { Field } from 'react-final-form';
 
 class IntputItem extends Component {
   render() {
     return (
-      <Field name="userName" validate={composeValidators(required, notTooLong)}>
+      <Field name={this.props.name} validate={this.props.validate}>
         {({ input, meta }) => (
           <div>
-            <input {...input} type="text" placeholder="User name" />
+            <input {...input} type={this.props.type} placeholder={this.props.placeholder} />
             {meta.error && meta.touched && <span>{meta.error}</span>}
+            <p>{this.props.condition}</p>
           </div>
         )}
       </Field>

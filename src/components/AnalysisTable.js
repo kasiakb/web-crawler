@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment'
 import '../css/UserPanel.css'
 import AnalaysisTableItem from './AnalaysisTableItem';
 

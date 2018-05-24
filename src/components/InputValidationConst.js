@@ -1,12 +1,19 @@
-export const required = value => (value ? undefined : "Required");
+const properUrl = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
 
-export const notTooLong = value => (value.length <= 10 ? undefined : "Too long title");
-
-export const properUrl = value =>
-(value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g) == null ? "Wrong url format" : undefined)
-
-export const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
+export const addWebValidation = values => {
+  const errors = {}
+  if (!values.title) {
+    errors.title = "Required";
+  } else if (values.title.length >= 10) {
+    errors.title = "Too long title"
+  }
+  if(!values.url) {
+    errors.url = "Required";
+  } else if (values.url.match(properUrl) == null) {
+    errors.url = "Wrong url format"
+  }
+  return errors
+}
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 

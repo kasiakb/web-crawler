@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
-import {
-  required,
-  notTooLong,
-  properUrl,
-  composeValidators
-} from './InputValidationConst'
+import ButtonItem from './ButtonItem';
+import IntputItem from './IntputItem';
+import { addWebValidation } from './InputValidationConst'
 
 class AddWebInputs extends Component {
 
@@ -21,6 +18,7 @@ class AddWebInputs extends Component {
       <h1>Choose web page to crawl</h1>
       <Form
         onSubmit={this.onSubmit}
+        validate={addWebValidation}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
           <form
             onSubmit={event =>{
@@ -36,36 +34,28 @@ class AddWebInputs extends Component {
               }}
               }
             >           
-            <Field name="title" validate={composeValidators(required, notTooLong)}>
-              {({ input, meta }) => (
-                <div>
-                  <input {...input} type="text" placeholder="Web page title" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
-            <Field name="url" validate={composeValidators(required, properUrl)}>
-              {({ input, meta }) => (
-                <div>
-                  <input {...input} type="text" placeholder="Web page url" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
-                </div>
-              )}
-            </Field>
+            <IntputItem
+            name={"title"}
+            type={"text"}
+            placeholder={"Web page title"}
+            />
+            <IntputItem
+            name={"url"}
+            type={"text"}
+            placeholder={"Web page url"}
+            />
             <div className="buttons">
-              <button
-              type="submit"
-              disabled={submitting}
-              >
-                Analyse
-              </button>
-              <button
-                type="button"
-                onClick={reset}
+              <ButtonItem
+                text={"Analyse"}
+                type={"submit"}
+                disabled={submitting}
+              />
+              <ButtonItem
+                text={"Reset"}
+                type={"button"}
                 disabled={submitting || pristine}
-              >
-                Reset
-              </button>
+                onClick={reset}
+              />
             </div>
           </form>
         )

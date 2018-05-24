@@ -4,8 +4,9 @@ class ButtonItem extends Component {
   render() {
     return (
       <button
-        type="submit"
+        type={this.props.type}
         disabled={this.submitting}
+        onClick={this.props.onClick}
       >
         {this.props.text}
       </button>

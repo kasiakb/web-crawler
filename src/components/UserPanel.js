@@ -9,12 +9,12 @@ class UserPanel extends Component {
     this.addWebPage = this.addWebPage.bind(this)
     this.deleteWebPage = this.deleteWebPage.bind(this)
     this.state = {
-      
+      siteAnalysis: []
     }
   }
 
   randomData(response) {
-    const newData = [response.data, []]
+    const newData = [response.data, this.state.siteAnalysis]
     const randomData = newData[Math.floor(Math.random() * newData.length)]
     return randomData
   }

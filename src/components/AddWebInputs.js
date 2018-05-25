@@ -31,18 +31,18 @@ class AddWebInputs extends Component {
                   reset();
                 })
                 return promise;
-              }}
               }
-            >           
+            }}
+          >           
             <IntputItem
-            name={"title"}
-            type={"text"}
-            placeholder={"Web page title"}
+              name={"title"}
+              type={"text"}
+              placeholder={"Web page title"}
             />
             <IntputItem
-            name={"url"}
-            type={"text"}
-            placeholder={"Web page url"}
+              name={"url"}
+              type={"text"}
+              placeholder={"Web page url"}
             />
             <div className="buttons">
               <ButtonItem
@@ -58,8 +58,7 @@ class AddWebInputs extends Component {
               />
             </div>
           </form>
-        )
-      }
+        )}
       />
     </div>
   )

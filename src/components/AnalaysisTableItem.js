@@ -6,7 +6,7 @@ class AnalaysisTableItem extends Component {
 
   render() {
     return (
-       <tr key={this.props.web.id}>
+      <tr key={this.props.web.id}>
         <td>{moment(this.props.web.attributes.updatedAt).format('lll')}</td>
         <td>{this.props.web.attributes.title}</td>
         <td>{this.props.web.attributes.url}</td>

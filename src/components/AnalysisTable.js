@@ -9,9 +9,10 @@ class AnalaysisTable extends Component {
       return siteAnalysis.map((web) => {
         return (
           <AnalaysisTableItem
-          web={web}
-          deleteWebPage={this.props.deleteWebPage}
-           />
+            key={web.id}
+            web={web}
+            deleteWebPage={this.props.deleteWebPage}
+          />
         );
       })
     }else{

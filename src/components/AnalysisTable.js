@@ -6,22 +6,20 @@ import NoWebs from './NoWebs';
 class AnalaysisTable extends Component {
 
   renderWebs(siteAnalysis) {
-    if (siteAnalysis) {
-      if(siteAnalysis.length > 0) {
-        return siteAnalysis.map((web) => {
-          return (
-            <AnalaysisTableItem
-              key={web.id}
-              web={web}
-              deleteWebPage={this.props.deleteWebPage}
-            />
-          );
-        })
-      }else if (siteAnalysis = []) {
+    if(siteAnalysis.length > 0) {
+      return siteAnalysis.map((web) => {
         return (
-          <NoWebs/>
-        )
-      }
+          <AnalaysisTableItem
+            key={web.id}
+            web={web}
+            deleteWebPage={this.props.deleteWebPage}
+          />
+        );
+      })
+    }else{
+      return (
+        <NoWebs/>
+      )
     }
   }
 

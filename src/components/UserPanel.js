@@ -13,13 +13,19 @@ class UserPanel extends Component {
     }
   }
 
+  randomData(response) {
+    const newData = [response.data, []]
+    const randomData = newData[Math.floor(Math.random() * newData.length)]
+    return randomData
+  }
+
   componentWillMount() {
     fetch('http://localhost:8000/siteAnalyses', {
       method: 'GET',
       mode: 'cors'
     })
     .then(response => response.json())
-    .then(response => this.setState({siteAnalysis: response.data}))
+    .then(response => this.setState({siteAnalysis: this.randomData(response)}))
     .catch(error => console.error('Error:', error))
   }
 

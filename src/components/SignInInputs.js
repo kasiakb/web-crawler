@@ -24,7 +24,18 @@ class SignInInputs extends Component {
         validate={signValidation}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
           <form
-            onSubmit={handleSubmit}
+          onSubmit={event =>{
+            let promise = handleSubmit(event);
+            if(promise){
+              promise.then(() => {
+                this.props.loginData(JSON.stringify(values, 0, 2))
+              })
+              promise.then(() => {
+                reset();
+              })
+              return promise;
+            }}
+          }
           >
             <IntputItem
               name={"email"}

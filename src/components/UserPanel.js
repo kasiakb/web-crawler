@@ -69,7 +69,10 @@ class UserPanel extends Component {
   render() {
     return (
       <div>
-        <AddWebInputs add={this.addWebPage}/>
+        <AddWebInputs
+        add={this.addWebPage}
+        websData={this.state.siteAnalysis}
+        />
         <AnalysisTable
           deleteWebPage={this.deleteWebPage}
           webPageInfo={this.state.siteAnalysis}

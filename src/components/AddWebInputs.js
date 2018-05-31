@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
+import _ from 'lodash'
 import ButtonItem from './ButtonItem';
 import IntputItem from './IntputItem';
-import { addWebValidation } from './InputValidationConst'
+import { addWebValidation} from './InputValidationConst'
+
+
 
 class AddWebInputs extends Component {
 
@@ -13,12 +16,13 @@ class AddWebInputs extends Component {
   }
 
   myForm() {
+    const validation = addWebValidation(this.props.websData)
     return (
     <div>
       <h1>Choose web page to crawl</h1>
       <Form
         onSubmit={this.onSubmit}
-        validate={addWebValidation}
+        validate={validation}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
           <form
             onSubmit={event =>{
@@ -32,7 +36,8 @@ class AddWebInputs extends Component {
                 })
                 return promise;
               }
-            }}
+            }
+          }
           >           
             <IntputItem
               name={"title"}
@@ -56,9 +61,11 @@ class AddWebInputs extends Component {
                 disabled={submitting || pristine}
                 onClick={reset}
               />
+              <pre>{JSON.stringify(values.url, 0, 2)}</pre>
             </div>
           </form>
-        )}
+        )
+      }
       />
     </div>
   )

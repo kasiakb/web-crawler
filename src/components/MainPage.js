@@ -7,9 +7,7 @@ class MainPage extends Component {
     super(props);
 
     this.passLoginData = this.passLoginData.bind(this)
-    this.state = {
-
-    }
+    this.state = {}
   }
 
   passLoginData(data) {

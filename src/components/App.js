@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import LoginPage from './LoginPage';
-import UserPanel from './UserPanel';
+import MainPage from './MainPage';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <LoginPage/>
+        <MainPage/>
       </div>
     );
   }

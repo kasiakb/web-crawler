@@ -18,7 +18,7 @@ class MainPage extends Component {
     })
   }
 
-  view() {
+  userPanelOrLogin() {
     if (this.state.loginData) {
       return  <UserPanel/>
     } else {
@@ -29,7 +29,7 @@ class MainPage extends Component {
   render() {
     return (
       <div>
-        {this.view()}
+        {this.userPanelOrLogin()}
       </div>
     );
   }

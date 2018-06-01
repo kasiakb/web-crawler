@@ -15,7 +15,7 @@ class LoginPage extends Component {
     }
   }
 
-  registerOrSign(e) {
+  registerOrSignIn(e) {
     e.preventDefault();
     if(this.state.signin === true) {
       this.setState({
@@ -31,30 +31,24 @@ class LoginPage extends Component {
   }
 
   loginData(data) {
-    this.setState({
-      loginData: data
-    })
+    this.props.passLoginData(data)
   }
 
   render() {
     let inputs
-    let button = <ButtonItem
-      text={this.state.buttonText}
-      type={"button"}
-      onClick={(e)=>this.registerOrSign(e)}
-    />
     if(this.state.signin === true) {
       inputs = <SignInInputs loginData = {this.loginData} />
     }else if (this.state.signin === false){
       inputs = <RegisterInputs/>
-    }if (this.state.loginData) {
-      inputs = <UserPanel/>
-      button = undefined
     }
 
     return (
       <div>
-        {button}
+        <ButtonItem
+          text={this.state.buttonText}
+          type={"button"}
+          onClick={(e)=>this.registerOrSignIn(e)}
+        />
         {inputs}
       </div>
     );

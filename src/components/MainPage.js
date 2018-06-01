@@ -18,17 +18,18 @@ class MainPage extends Component {
     })
   }
 
-  render() {
-    let inputs
+  view() {
     if (this.state.loginData) {
-      inputs = <UserPanel/>
+      return  <UserPanel/>
     } else {
-      inputs = <LoginPage passLoginData = {this.passLoginData}/>
+      return <LoginPage passLoginData = {this.passLoginData}/>
     }
+  }
 
+  render() {
     return (
       <div>
-        {inputs}
+        {this.view()}
       </div>
     );
   }
